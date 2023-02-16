@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CursoAlternativoApiApplication<curso-alternativo-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mx.jh.escuela.cursoalternativoapi.CursoAlternativoApiApplication",
+            "projectName": "curso-alternativo-api",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
