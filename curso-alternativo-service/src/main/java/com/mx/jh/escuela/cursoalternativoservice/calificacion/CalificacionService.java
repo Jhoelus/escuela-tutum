@@ -7,6 +7,6 @@ import com.mx.jh.escuela.cursoalternativomodel.dtos.response.CalificacionAlumnoR
 public interface CalificacionService {
     BaseResponse<CalificacionAlumnoResponse> findByIdAlumno(Long id);
     BaseResponse<Void> save(CalificacionRequest user);
-    // CalificacionModel update(CalificacionModel user);
-    // void delete(Long id);
+    BaseResponse<Void> update(CalificacionRequest user);
+    BaseResponse<Void> delete(Long id);
 }

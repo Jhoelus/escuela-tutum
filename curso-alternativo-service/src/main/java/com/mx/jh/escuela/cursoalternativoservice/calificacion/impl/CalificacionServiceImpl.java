@@ -52,6 +52,14 @@ public class CalificacionServiceImpl implements CalificacionService {
         if (alumnoOptional.isPresent()) {
             Optional<MateriaModel> materiaOptional = materiaRepository.findById(calificacionRequest.getIdMateria());
             if (materiaOptional.isPresent()) {
+
+                CalificacionModel calificacionBDD = 
+                    calificacionRepository.findByAlumnoAndMateria(alumnoOptional.get(), materiaOptional.get());
+
+                if (calificacionBDD != null) {
+                    throw new CalificacionException(AplicationMessage.MESSAGE_CALIFICACION_ERROR_1);
+                } 
+
                 CalificacionModel newCalificacionRequest = new CalificacionModel();
                 newCalificacionRequest.setAlumno(alumnoOptional.get());
                 newCalificacionRequest.setMateria(materiaOptional.get());
@@ -72,13 +80,28 @@ public class CalificacionServiceImpl implements CalificacionService {
         }
     }
 
-    // @Override
-    // public void delete(Long id) {
-    //     // TODO Auto-generated method stub
-        
-    // }
+    @Override    
+    @Transactional
+    public BaseResponse<Void> delete(Long id) {
+
+        Optional<CalificacionModel> calificacionOptional = calificacionRepository.findById(id);
+
+        if(calificacionOptional.isPresent()) {
+            calificacionRepository.deleteById(id);
+
+            BaseResponse<Void> response = new BaseResponse<>();
+                response.setCode(AplicationMessage.MESSAGE_EXITO_DEFAULT.getCode());
+                response.setMessage(AplicationMessage.MESSAGE_EXITO_DEFAULT.getMessage());
+                response.setSuccess("OK");
+
+                return response;
+        } else {
+            throw new CalificacionException(AplicationMessage.MESSAGE_CALIFICACION_ERROR_3);
+        }        
+    }
 
     @Override
+    @Transactional(readOnly = true)
     public BaseResponse<CalificacionAlumnoResponse> findByIdAlumno(Long id) {
         
         log.info("Busqueda de calificacion del alumno con id: {}", id);
@@ -116,11 +139,37 @@ public class CalificacionServiceImpl implements CalificacionService {
         }
     }
 
-    // @Override
-    // public CalificacionModel update(CalificacionModel user) {
-    //     // TODO Auto-generated method stub
-    //     return null;
-    // }
+    @Override
+    @Transactional
+    public BaseResponse<Void> update(CalificacionRequest calificacionRequest) {
+        
+        BaseResponse<Void> response = null;
+        Optional<AlumnoModel> alumnoOptional = alumnoRepository.findById(calificacionRequest.getIdAlumno());
 
-    
+        if (alumnoOptional.isPresent()) {
+            Optional<MateriaModel> materiaOptional = materiaRepository.findById(calificacionRequest.getIdMateria());
+            if (materiaOptional.isPresent()) {
+                CalificacionModel calificacionBDD = 
+                    calificacionRepository.findByAlumnoAndMateria(alumnoOptional.get(), materiaOptional.get());
+
+                    if (calificacionBDD != null) {
+                        calificacionBDD.setCalificacion(calificacionRequest.getCalificacion());
+                        calificacionRepository.save(calificacionBDD);
+                    } else {
+                        throw new CalificacionException(AplicationMessage.MESSAGE_CALIFICACION_ERROR_2);
+                    }
+
+                response = new BaseResponse<>();
+                response.setCode(AplicationMessage.MESSAGE_EXITO_DEFAULT.getCode());
+                response.setMessage(AplicationMessage.MESSAGE_EXITO_DEFAULT.getMessage());
+                response.setSuccess("OK");
+
+                return response;
+            } else {
+                throw new CalificacionException(AplicationMessage.MESSAGE_MATERIA_ERROR_1);
+            }
+        } else {
+            throw new CalificacionException(AplicationMessage.MESSAGE_ALUMNO_ERROR_1);
+        }
+    }
 }

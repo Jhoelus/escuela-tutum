@@ -13,20 +13,21 @@ import lombok.Data;
 @Data
 public class CalificacionRequest implements Serializable {
     
-    public interface CalificacionAlta{}
+    public interface CalificacionCreate{}
+    public interface CalificacionUpdate{}
 
-    @NotNull(groups = {CalificacionAlta.class}, message = "campo idAlumno invalido")
-    @Positive(groups = {CalificacionAlta.class}, message = "campo idAlumno invalido")
+    @NotNull(groups = {CalificacionCreate.class,CalificacionUpdate.class}, message = "campo idAlumno invalido")
+    @Positive(groups = {CalificacionCreate.class,CalificacionUpdate.class}, message = "campo idAlumno invalido")
     private Long idAlumno;
 
-    @NotNull(groups = {CalificacionAlta.class}, message = "campo idMateria invalido")
-    @Positive(groups = {CalificacionAlta.class}, message = "campo idMateria invalido")
+    @NotNull(groups = {CalificacionCreate.class,CalificacionUpdate.class}, message = "campo idMateria invalido")
+    @Positive(groups = {CalificacionCreate.class,CalificacionUpdate.class}, message = "campo idMateria invalido")
     private Long idMateria;
 
-    @NotNull(groups = {CalificacionAlta.class}, message = "campo calificacion invalido")
-    @Positive(groups = {CalificacionAlta.class}, message = "campo calificacion invalido")
-    @Digits(groups = {CalificacionAlta.class}, integer=2, fraction=2, message = "campo calificacion invalido")
-    @DecimalMax(groups = {CalificacionAlta.class}, value = "10.0", message = "campo calificacion tiene que ser maximo 10")
-    @DecimalMin(groups = {CalificacionAlta.class}, value = "1.0", message = "campo calificacion invalido")
+    @NotNull(groups = {CalificacionCreate.class,CalificacionUpdate.class}, message = "campo calificacion invalido")
+    @Positive(groups = {CalificacionCreate.class,CalificacionUpdate.class}, message = "campo calificacion invalido")
+    @Digits(groups = {CalificacionCreate.class,CalificacionUpdate.class}, integer=2, fraction=2, message = "campo calificacion invalido")
+    @DecimalMax(groups = {CalificacionCreate.class,CalificacionUpdate.class}, value = "10.0", message = "campo calificacion tiene que ser maximo 10")
+    @DecimalMin(groups = {CalificacionCreate.class,CalificacionUpdate.class}, value = "1.0", message = "campo calificacion invalido")
     double calificacion;
 }

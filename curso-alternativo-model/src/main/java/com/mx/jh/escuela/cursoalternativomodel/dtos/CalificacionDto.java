@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class CalificacionDto implements Serializable {
     
+    private Long id;
     private AlumnoDto alumno;
     private MateriaDto materia;
     double calificacion;

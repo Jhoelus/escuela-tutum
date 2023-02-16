@@ -8,16 +8,25 @@ POST http://localhost:8080/escuela-rest-api/v1/calificaciones
 Content-Type: application/json
 
 {
-    "idAlumno":8,
-    "idMateria":4,
+    "idAlumno":1,
+    "idMateria":3,
     "calificacion": "6.5"
 }
-
 
 ###
 GET http://localhost:8080/escuela-rest-api/v1/calificaciones?idAlumno=1
 Content-Type: application/json
 
 ###
-DELETE http://localhost:8080/escuela-rest-api/v1/
+PUT http://localhost:8080/escuela-rest-api/v1/calificaciones
+Content-Type: application/json
+
+{
+    "idAlumno":1,
+    "idMateria":3,
+    "calificacion": "9"
+}
+
+###
+DELETE  http://localhost:8080/escuela-rest-api/v1/calificaciones/2
 Content-Type: application/json
