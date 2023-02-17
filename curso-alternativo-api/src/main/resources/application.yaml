@@ -18,3 +18,5 @@ logging:
         org:
             hibernate:
                 SQL: debug
+
+uris-cors-config-front: http://localhost:4200, https://dev.com.mx
