@@ -8,9 +8,9 @@ POST http://localhost:8080/escuela-rest-api/v1/calificaciones
 Content-Type: application/json
 
 {
-    "idAlumno":1,
-    "idMateria":3,
-    "calificacion": "6.5"
+    "idAlumno":3,
+    "idMateria":1,
+    "calificacion": "9"
 }
 
 ###
@@ -23,8 +23,8 @@ Content-Type: application/json
 
 {
     "idAlumno":1,
-    "idMateria":3,
-    "calificacion": "9"
+    "idMateria":1,
+    "calificacion": "6"
 }
 
 ###

@@ -10,7 +10,10 @@ import com.mx.jh.escuela.cursoalternativomodel.entities.AlumnoModel;
 import com.mx.jh.escuela.cursoalternativoservice.alumno.AlumnoService;
 import com.mx.jh.escuela.repository.alumno.AlumnoRepository;
 
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class AlumnoServiceImpl implements AlumnoService {
 
     @Autowired
@@ -24,7 +27,9 @@ public class AlumnoServiceImpl implements AlumnoService {
 
     @Override
     public List<AlumnoModel> findAll() {
-        return alumnoRepository.findAll();
+        List<AlumnoModel> alumnos = alumnoRepository.findAll();
+        log.info("Se encontrarion: " + alumnos.size());
+        return alumnos;
     }
 
     @Override
